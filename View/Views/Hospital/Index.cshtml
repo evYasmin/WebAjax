@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Hospitais</h2>
+
+<button class="btn btn-primary float-right mb-2" data-toggle="modal"
+        data-target="#modalCadastroHospital">
+    <i class="fas fa-plus"></i> Novo Hospital
+</button>
+<div class="row">
+    <div class="col-3 offset-9">
+        <div class="form-group">
+            <input type="text" id="campo-pesquisa"
+                   placeholder="Busca"
+                   class="form-control" />
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+
+            <th>Código</th>
+            <th>Razão Social</th>
+            <th>CNPJ</th>
+            <th>Ação</th>
+
+        </tr>
+    </thead>
+    <tfoot class="thead-dark">
+        <tr>
+            <th>Código</th>
+            <th>Razão Social</th>
+            <th>CNPJ</th>
+            <th>Ação</th>
+
+        </tr>
+    </tfoot>
+    <tbody id="lista-hospitais"></tbody>
+</table>
+<div class="modal fade" id="modalCadastroHospital" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Hospital</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="campo-razao-social"> Razão Social</label>
+                            <input type="text" id="campo-razao-social" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="campo-cnpj">CNPJ</label>
+                            <input type="text" id="campo-cnpj" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="campo-faturamento">
+                                Faturamento
+                            </label>
+                            <input type="text" id="campo-faturamento" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-check">
+                            <input type="checkbox" id="campo-privado" class="form-check-input" />
+                            <label for="campo-privado" class="form-check-label">Particular</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success"
+                        id="hospital-botao-salvar">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
