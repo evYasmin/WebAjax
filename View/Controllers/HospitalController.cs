@@ -55,5 +55,12 @@ namespace View.Controllers
             return Json(hospital, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult Update(Hospital hospital)
+        {
+            bool alterou = repository.Alterar(hospital);
+            return Json(new { status = alterou });
+        }
+
     }
 }

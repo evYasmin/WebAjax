@@ -1,12 +1,15 @@
 ﻿
 //jquery
 $(function () {
+
+    $id = -1;
     $(".table").on("click", ".botao-editar", function () {
         $id = $(this).data("id");
         $.ajax({
             url: '/hospital/obterpeloid/' + $id,
             method: 'get',
             success: function (data) {
+                $id = data.Id;
                 $("#campo-razao-social").val(data.RazaoSocial);
                 $("#campo-faturamento").val(data.Faturamento);
                 $("#campo-cnpj").val(data.Cnpj);
@@ -15,12 +18,12 @@ $(function () {
         })
     })
     $("#campo-pesquisa").on("keyup", function (e) {
-            // 13 == Tecla Enter do teclado
-            if (e.keyCode == 13) {
-                obterTodos();
-            }
-            console.log(e);
-        });
+        // 13 == Tecla Enter do teclado
+        if (e.keyCode == 13) {
+            obterTodos();
+        }
+        console.log(e);
+    });
     function obterTodos() {
         $busca = $("#campo-pesquisa").val();
         $("#lista-hospitais").empty();
@@ -82,11 +85,24 @@ $(function () {
     }
 
     $("#hospital-botao-salvar").on("click", function () {
+
+        if ($id == -1) {
+            Inserir();
+        }
+        else {
+            alterar();
+        }
+
+
+
+    });
+
+    function inserir() {
+        $id = -1;
         $nome = $("#campo-razao-social").val();
         $faturamento = $("#campo-faturamento").val();
         $cnpj = $("#campo-cnpj").val();
         $particular = $("#campo-privado").prop("checked");
-
         $.ajax({
             method: "post",
             url: "/hospital/store",
@@ -105,12 +121,38 @@ $(function () {
             }
         })
 
+    }
 
-    });
 
+    function alterar() {
+        $id = -1;
+        $nome = $("#campo-razao-social").val();
+        $faturamento = $("#campo-faturamento").val();
+        $cnpj = $("#campo-cnpj").val();
+        $particular = $("#campo-privado").prop("checked");
+        $.ajax({
+            method: "post",
+            url: "/hospital/update",
+            data: {
+                RazaoSocial: $nome,
+                Faturamento: $faturamento,
+                Cnpj: $cnpj,
+                Particular: $particular,
+                id: $id
+            },
+            success: function (data) {
+                $("#modalCadastroHospital").modal("hide");
+                obterTodos();
+            },
+            error: function (data) {
+                console.log("ERRO :/");
+            }
+        })
+
+    }
 
     $("#modalCadastroHospital").on("show.bs.modal", function () {
-        
+
     });
 
     function limparCampos() {

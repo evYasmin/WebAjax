@@ -35,6 +35,7 @@ namespace Repository.Repositories
             hospitalOriginal.RazaoSocial = hospital.RazaoSocial;
             hospitalOriginal.Particular = hospital.Particular;
             hospitalOriginal.Faturamento = hospital.Faturamento;
+            hospitalOriginal.Cnpj = hospital.Cnpj;
             context.SaveChanges();
             return true;
         }
